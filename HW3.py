@@ -43,12 +43,10 @@ class DigitalBookofAnswers():
         if question in self.question_asked_list:
             for i in range(len(self.question_asked_list)):
                 if question == self.question_asked_list[i]:
-                    return f"I’ve already answered this question. The answer is:{self.answer_list[i]}"
+                    return f"I’ve already answered this question. The answer is{self.book_answer_list[self.answered_list[i]]}"
         else:
             randomindex = random(0, len(self.book_answer_list)-1)
-            #add index of random answer at the end of answered_list
             self.answered_list.append(randomindex)
-            #add question at the end of questions_asked_list
             self.question_asked_list.append(question)
             return self.book_answer_list[randomindex]
             
