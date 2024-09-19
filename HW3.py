@@ -1,6 +1,6 @@
-# Your name: 
+# Your name: Nina Wang
 # Your student id:
-# Your email:
+# Your email: Wangnina@umich.edu
 # Who or what you worked with on this homework (including generative AI like ChatGPT):
 # If you worked with generative AI also add a statement for how you used it.  
 # e.g.: 
@@ -15,8 +15,9 @@ class DigitalBookofAnswers():
     #       answers: a list of potential answers
     # RETURNS: None
     def __init__(self, answers):
-
-        pass
+        self.book_answer_list = answers
+        self.question_asked_list = []
+        self.answered_list = []
 
 
     # Create the __str__ method
@@ -24,16 +25,19 @@ class DigitalBookofAnswers():
     #       self: the curent object
     # RETURNS: a string
     def __str__(self):
+        if len(self.book_answer_list) == 0:
+            return ""
 
-        pass
-
+        final = self.book_answer_list[0]
+        for answer in self.book_answer_list:
+            final = final + "-" + answer
+        return final
     # Creates the check_get_answer method
     # ARGUMENTS:
     #       self: the current object
     #       question: the question the user wants to ask the digital book of answers
     # RETURNS: a string
     def check_get_answer(self, question):
-
         pass
 
     # Creates open_book method
