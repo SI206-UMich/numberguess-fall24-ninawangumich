@@ -5,8 +5,10 @@
 # If you worked with generative AI also add a statement for how you used it.  
 # e.g.: 
 # Asked Chatgpt hints for debugging and suggesting the general sturcture of the code
-
 # create a Digital Book of Answers
+
+import random
+
 class DigitalBookofAnswers():
 
     # create the constructor (__init__) method 
@@ -38,8 +40,18 @@ class DigitalBookofAnswers():
     #       question: the question the user wants to ask the digital book of answers
     # RETURNS: a string
     def check_get_answer(self, question):
-        pass
-
+        if question in self.question_asked_list:
+            for i in range(len(self.question_asked_list)):
+                if question == self.question_asked_list[i]:
+                    return f"I’ve already answered this question. The answer is:{self.answer_list[i]}"
+        else:
+            randomindex = random(0, len(self.book_answer_list)-1)
+            #add index of random answer at the end of answered_list
+            self.answered_list.append(randomindex)
+            #add question at the end of questions_asked_list
+            self.question_asked_list.append(question)
+            return self.book_answer_list[randomindex]
+            
     # Creates open_book method
     # ARGUMENTS:
     #   self: the current object
