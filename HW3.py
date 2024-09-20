@@ -28,10 +28,10 @@ class DigitalBookofAnswers():
     # RETURNS: a string
     def __str__(self):
         if len(self.book_answer_list) == 0:
-            return ","
+            return ""
 
         final = self.book_answer_list[0]
-        for answer in self.book_answer_list:
+        for answer in self.book_answer_list[1:]:
             final = final + " - " + answer
         return final
     # Creates the check_get_answer method
@@ -43,7 +43,7 @@ class DigitalBookofAnswers():
         if question in self.questions_asked_list:
             for i in range(len(self.questions_asked_list)):
                 if question == self.questions_asked_list[i]:
-                    return f"I’ve already answered this question. The answer is{self.book_answer_list[self.answered_list[i]]}"
+                    return f"I’ve already answered this question. The answer is {self.book_answer_list[self.answered_list[i]]}"
         else:
             randomindex = random.randint(0, len(self.book_answer_list)-1)
             self.answered_list.append(randomindex)
@@ -73,17 +73,20 @@ class DigitalBookofAnswers():
         if len(self.answered_list) == 0:
             print ("Empty")
             return []
+        
         freq = {}
         for answer in self.answered_list:
             if freq.get(answer) == None:
                 freq[answer] = 1
             else:
                 freq[answer] += 1
+
         sorted_keys = [key for key, value in sorted(freq.items(), key=lambda item: item[1], reverse=True)]
+       
         finalList = []
         for key in sorted_keys:
-            finalList.append(f"{freq[key]} - {self.book_answer_list[key]}")
-            return (finalList)
+            finalList.append(f"{freq[key]} - {self.book_answer_list[key].lower()}")
+        return (finalList)
 
 
 
@@ -182,13 +185,25 @@ def my_test():
 
 
 def main():
-    pass
+    answers = [
+        "Follow Your Inner Voice",
+        "Stay Positive",
+        "Go For It",
+        "Believe in Yourself",
+        "Stay Open to the Future",
+        "Enjoy It"
+    ]
+
+    book =  DigitalBookofAnswers(answers)
+    book.open_book()
+    print(book.answer_log())
+    
 
 
 
 # Only run the main function if this file is being run (not imported)
 if __name__ == "__main__":
-    #main()
+    main()
     test() 
-    # my_test() #TODO: Uncomment if you do the extra credit
+    my_test() #TODO: Uncomment if you do the extra credit
     
