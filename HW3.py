@@ -34,6 +34,7 @@ class DigitalBookofAnswers():
         for answer in self.book_answer_list[1:]:
             final = final + " - " + answer
         return final
+    
     # Creates the check_get_answer method
     # ARGUMENTS:
     #       self: the current object
@@ -180,9 +181,49 @@ def test():
 # Extra Credit
 def my_test():
     # Put your test code here
+    answers = [
+        "Follow Your Inner Voice",
+        "Stay Positive",
+        "Go For It",
+        "Believe in Yourself",
+        "Stay Open to the Future",
+        "Enjoy It"
+    ]
 
-    pass
+    book =  DigitalBookofAnswers(answers)
+    print("Testing answer_log")
+    book.answered_list = [0, 3]
+    res = book.answer_log()
+    expected = ['1 - follow your inner voice', '1 - believe in yourself']
+    print(f"Expected: {expected}, Actual: {res}")
+    print(" ")
 
+    
+    book = DigitalBookofAnswers(answers)
+    print("Testing for correct output from answer_log when no questions have been asked")
+    book.questions_asked_list = []
+    expected = []
+    res = book.answer_log()
+    print(f"Expected: {expected}, Actual: {res}")
+    print(" ")
+
+    book = DigitalBookofAnswers(answers)
+    print("Testing open_book to correctly prompt Turn 1")
+    book.questions_asked_list = []
+    expected = ['Turn 1 - Please enter your question: ']
+    res = book.open_book()
+    print(f"Expected: {expected}, Actual: {res}")
+    print(" ")
+
+    book = DigitalBookofAnswers(answers)
+    print("Testing check_get_answer when the same question is asked twice")
+    book.book_answer_list = ['Go For It']
+    question = "What is it?"
+    book.questions_asked_list = [question]
+    expected = ['I’ve already answered this question. The answer is go for it']
+    res = book.check_get_answer(question)
+    print(f"Expected: {expected}, Actual: {res}")
+    print(" ")
 
 def main():
     answers = [
@@ -203,7 +244,7 @@ def main():
 
 # Only run the main function if this file is being run (not imported)
 if __name__ == "__main__":
-    main()
-    test() 
+    #main()
+    #test() 
     my_test() #TODO: Uncomment if you do the extra credit
     
