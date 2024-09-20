@@ -70,8 +70,21 @@ class DigitalBookofAnswers():
     #       self: the curent object
     # RETURNS: a list
     def answer_log(self):
+        if len(self.answered_list) == 0:
+            print ("Empty")
+            return []
+        freq = {}
+        for answer in self.answered_list:
+            if not freq[answer]:
+                freq[answer] = 1
+            else:
+                freq[answer] += 1
+        sorted_keys = [key for key, value in sorted(freq.items(), key=lambda item: item[1], reverse=True)]
+        finalList = []
+        for key in sorted_keys:
+            finalList.append(f"{freq[key]} - {self.book_answer_list[key]}")
 
-        pass
+
 
 
 def test():
