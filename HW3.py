@@ -18,7 +18,7 @@ class DigitalBookofAnswers():
     # RETURNS: None
     def __init__(self, answers):
         self.book_answer_list = answers
-        self.question_asked_list = []
+        self.questions_asked_list = []
         self.answered_list = []
 
 
@@ -28,11 +28,11 @@ class DigitalBookofAnswers():
     # RETURNS: a string
     def __str__(self):
         if len(self.book_answer_list) == 0:
-            return ""
+            return ","
 
         final = self.book_answer_list[0]
         for answer in self.book_answer_list:
-            final = final + "-" + answer
+            final = final + " - " + answer
         return final
     # Creates the check_get_answer method
     # ARGUMENTS:
@@ -40,14 +40,14 @@ class DigitalBookofAnswers():
     #       question: the question the user wants to ask the digital book of answers
     # RETURNS: a string
     def check_get_answer(self, question):
-        if question in self.question_asked_list:
-            for i in range(len(self.question_asked_list)):
-                if question == self.question_asked_list[i]:
+        if question in self.questions_asked_list:
+            for i in range(len(self.questions_asked_list)):
+                if question == self.questions_asked_list[i]:
                     return f"I’ve already answered this question. The answer is{self.book_answer_list[self.answered_list[i]]}"
         else:
-            randomindex = random(0, len(self.book_answer_list)-1)
+            randomindex = random.randint(0, len(self.book_answer_list)-1)
             self.answered_list.append(randomindex)
-            self.question_asked_list.append(question)
+            self.questions_asked_list.append(question)
             return self.book_answer_list[randomindex]
             
     # Creates open_book method
@@ -75,7 +75,7 @@ class DigitalBookofAnswers():
             return []
         freq = {}
         for answer in self.answered_list:
-            if not freq[answer]:
+            if freq.get(answer) == None:
                 freq[answer] = 1
             else:
                 freq[answer] += 1
@@ -83,6 +83,7 @@ class DigitalBookofAnswers():
         finalList = []
         for key in sorted_keys:
             finalList.append(f"{freq[key]} - {self.book_answer_list[key]}")
+            return (finalList)
 
 
 
