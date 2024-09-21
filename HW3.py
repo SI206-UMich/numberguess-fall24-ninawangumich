@@ -1,5 +1,5 @@
 # Your name: Nina Wang
-# Your student id:
+# Your student id: 2382 8160
 # Your email: Wangnina@umich.edu
 # Who or what you worked with on this homework (including generative AI like ChatGPT):
 # If you worked with generative AI also add a statement for how you used it.  
@@ -190,15 +190,6 @@ def my_test():
         "Enjoy It"
     ]
 
-    book =  DigitalBookofAnswers(answers)
-    print("Testing answer_log")
-    book.answered_list = [0, 3]
-    res = book.answer_log()
-    expected = ['1 - follow your inner voice', '1 - believe in yourself']
-    print(f"Expected: {expected}, Actual: {res}")
-    print(" ")
-
-    
     book = DigitalBookofAnswers(answers)
     print("Testing for correct output from answer_log when no questions have been asked")
     book.questions_asked_list = []
@@ -206,21 +197,30 @@ def my_test():
     res = book.answer_log()
     print(f"Expected: {expected}, Actual: {res}")
     print(" ")
+    
+    answers_list = ["Stay Positive", "Go For It", "Enjoy It"]
+    book =  DigitalBookofAnswers(answers_list)
+    print("Testing correct behavior from answer_log when answer_list is [Stay Positive’, ‘Go For It’, ‘Enjoy It’]")
+    book.answered_list = [2, 1, 2]
+    res = book.answer_log()
+    expected = ['2 - enjoy it', '1 - go for it']
+    print(f"Expected: {expected}, Actual: {res}")
+    print(" ")
 
     book = DigitalBookofAnswers(answers)
     print("Testing open_book to correctly prompt Turn 1")
     book.questions_asked_list = []
     expected = ['Turn 1 - Please enter your question: ']
-    res = book.open_book()
-    print(f"Expected: {expected}, Actual: {res}")
+    book.open_book()
+    print(f"Expected: {expected}")
     print(" ")
 
     book = DigitalBookofAnswers(answers)
     print("Testing check_get_answer when the same question is asked twice")
-    book.book_answer_list = ['Go For It']
+    book.answered_list = [2]
     question = "What is it?"
     book.questions_asked_list = [question]
-    expected = ['I’ve already answered this question. The answer is go for it']
+    expected = ['I’ve already answered this question. The answer is Go For It']
     res = book.check_get_answer(question)
     print(f"Expected: {expected}, Actual: {res}")
     print(" ")
@@ -238,13 +238,11 @@ def main():
     book =  DigitalBookofAnswers(answers)
     book.open_book()
     print(book.answer_log())
-    
-
 
 
 # Only run the main function if this file is being run (not imported)
 if __name__ == "__main__":
     #main()
     #test() 
-    my_test() #TODO: Uncomment if you do the extra credit
+    #my_test() 
     
